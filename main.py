@@ -8,13 +8,29 @@ import winsound
 from argparse import ArgumentParser
 
 SOUND_FREQUENCY = 2500
-SOUND_DURATION = 400    # milli second
+SOUND_DURATION = 400  # milli second
 
-parser = ArgumentParser(prog="rwcopy", description="Generates random words and sentences and copyies them to the clipboard.", epilog="rwcopy - by Aditya Shrivastav")
+parser = ArgumentParser(
+    prog="rwcopy",
+    description="Generates random words and sentences and copyies them to the clipboard.",
+    epilog="rwcopy - by Aditya Shrivastav",
+)
 
-parser.add_argument('--gethelper', help="Copy Javascript console automation code", action='store_true')
-parser.add_argument('-i', '--iterations', default=10, help="Number of words/sentences to generate (default = 10)")
-parser.add_argument('-g', '--timegap', default=8, help="Time gap (sec) between word consequent word generations (default = 8)")
+parser.add_argument(
+    "--gethelper", help="Copy Javascript console automation code", action="store_true"
+)
+parser.add_argument(
+    "-i",
+    "--iterations",
+    default=10,
+    help="Number of words/sentences to generate (default = 10)",
+)
+parser.add_argument(
+    "-g",
+    "--timegap",
+    default=8,
+    help="Time gap (sec) between word consequent word generations (default = 8)",
+)
 raw_args = parser.parse_args()
 
 if raw_args.gethelper != None:
@@ -26,10 +42,7 @@ if raw_args.gethelper != None:
 
 args = {}
 try:
-    args = {
-        "iterations": int(raw_args.iterations),
-        "timegap": int(raw_args.timegap)
-    }
+    args = {"iterations": int(raw_args.iterations), "timegap": int(raw_args.timegap)}
 except ValueError:
     raise Exception("Both `iterations` and `timegap must be integer values.")
 
