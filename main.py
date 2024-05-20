@@ -12,9 +12,17 @@ SOUND_DURATION = 400    # milli second
 
 parser = ArgumentParser(prog="rwcopy", description="Generates random words and sentences and copyies them to the clipboard.", epilog="rwcopy - by Aditya Shrivastav")
 
+parser.add_argument('--gethelper', help="Copy Javascript console automation code", action='store_true')
 parser.add_argument('-i', '--iterations', default=10, help="Number of words/sentences to generate (default = 10)")
 parser.add_argument('-g', '--timegap', default=8, help="Time gap (sec) between word consequent word generations (default = 8)")
 raw_args = parser.parse_args()
+
+if raw_args.gethelper != None:
+    with open("paste.js") as file:
+        code = file.read()
+        pyperclip.copy(code)
+    print("Code copied to your clipboard.")
+    sys.exit(0)
 
 args = {}
 try:
