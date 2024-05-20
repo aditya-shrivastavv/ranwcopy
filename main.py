@@ -1,3 +1,5 @@
+#!python
+
 from wonderwords import RandomWord, RandomSentence
 import pyperclip
 import random
@@ -11,6 +13,8 @@ rs = RandomSentence()
 
 if len(sys.argv) == 2:
     const.iterations = int(sys.argv[1])
+if len(sys.argv) == 3:
+    const.timegap = int(sys.argv[2])
 
 for i in range(const.iterations):
     balancer = round(random.random())

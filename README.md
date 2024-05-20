@@ -18,7 +18,7 @@ Install required libraries
 pip install -r requirements.txt
 ```
 
-Generate 10 words (default)
+Start generating words (10 default)
 
 ```py copy
 python main.py
