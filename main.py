@@ -1,22 +1,34 @@
 #!python
-
 from wonderwords import RandomWord, RandomSentence
 import pyperclip
 import random
 import time
 import sys
 import winsound
-from constants import const
+from argparse import ArgumentParser
+
+SOUND_FREQUENCY = 2500
+SOUND_DURATION = 400    # milli second
+
+parser = ArgumentParser(prog="rwcopy", description="Generates random words and sentences and copyies them to the clipboard.", epilog="rwcopy - by Aditya Shrivastav")
+
+parser.add_argument('-i', '--iterations', default=10, help="Number of words/sentences to generate (default = 10)")
+parser.add_argument('-g', '--timegap', default=8, help="Time gap (sec) between word consequent word generations (default = 8)")
+raw_args = parser.parse_args()
+
+args = {}
+try:
+    args = {
+        "iterations": int(raw_args.iterations),
+        "timegap": int(raw_args.timegap)
+    }
+except ValueError:
+    raise Exception("Both `iterations` and `timegap must be integer values.")
 
 rw = RandomWord()
 rs = RandomSentence()
 
-if len(sys.argv) == 2:
-    const.iterations = int(sys.argv[1])
-if len(sys.argv) == 3:
-    const.timegap = int(sys.argv[2])
-
-for i in range(const.iterations):
+for i in range(args["iterations"]):
     balancer = round(random.random())
 
     if balancer:
@@ -26,12 +38,12 @@ for i in range(const.iterations):
         sentence = rs.simple_sentence()
         pyperclip.copy(sentence)
 
-    for remaining in range(const.timegap, 0, -1):
+    for remaining in range(args["timegap"], 0, -1):
         sys.stdout.write("\r")
         sys.stdout.write(f"{remaining} seconds remaining")
         sys.stdout.flush()
         time.sleep(1)
 
     sys.stdout.write("\rPaste!!!                  \n")
-    winsound.Beep(const.sound_frequency, const.sound_duration)
-    print("Iterations remaining: ", const.iterations - i - 1, "\n")
+    winsound.Beep(SOUND_FREQUENCY, SOUND_DURATION)
+    print("Iterations remaining: ", args["iterations"] - i - 1, "\n")
