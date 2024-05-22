@@ -7,9 +7,6 @@ import sys
 import winsound
 from argparse import ArgumentParser
 
-SOUND_FREQUENCY = 2500
-SOUND_DURATION = 400  # milli second
-
 def init():
     parser = ArgumentParser(
         prog="rwcopy",
@@ -44,6 +41,10 @@ def init():
     args = {}
     try:
         args = {"iterations": int(raw_args.iterations), "timegap": int(raw_args.timegap)}
+        print("- - -")
+        print("Iterations:", args["iterations"])
+        print("Time Gap:", args["timegap"])
+        print("- - -")
     except ValueError:
         raise Exception("Both `iterations` and `timegap must be integer values.")
 
@@ -51,6 +52,7 @@ def init():
     rs = RandomSentence()
 
     for i in range(args["iterations"]):
+        winsound.Beep(2500, 400)
         balancer = round(random.random())
 
         if balancer:
@@ -67,8 +69,9 @@ def init():
             time.sleep(1)
 
         sys.stdout.write("\rPaste!!!                  \n")
-        winsound.Beep(SOUND_FREQUENCY, SOUND_DURATION)
         print("Iterations remaining: ", args["iterations"] - i - 1, "\n")
+
+    winsound.Beep(1800, 900)
 
 if __name__ == "__main__":
     init()
