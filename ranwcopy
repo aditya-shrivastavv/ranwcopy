@@ -64,7 +64,7 @@ def init():
 
         for remaining in range(args["timegap"], 0, -1):
             sys.stdout.write("\r")
-            sys.stdout.write(f"{remaining} seconds remaining")
+            sys.stdout.write(f"{remaining:2} seconds remaining")
             sys.stdout.flush()
             time.sleep(1)
 
