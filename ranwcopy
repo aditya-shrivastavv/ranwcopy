@@ -42,8 +42,8 @@ def init():
     try:
         args = {"iterations": int(raw_args.iterations), "timegap": int(raw_args.timegap)}
         print("- - -")
-        print("Iterations:", args["iterations"])
-        print("Time Gap:", args["timegap"])
+        print("Total Iterations:", args["iterations"])
+        print("Time Gap:", args["timegap"], "seconds")
         print("- - -")
     except ValueError:
         raise Exception("Both `iterations` and `timegap must be integer values.")
