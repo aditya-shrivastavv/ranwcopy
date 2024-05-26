@@ -32,7 +32,7 @@ def init():
     raw_args = parser.parse_args()
 
     if raw_args.gethelper == True:
-        with open("E:\MAIN\executables\python-word-gen-copy\paste.js") as file:
+        with open(r"E:\MAIN\executables\python-word-gen-copy\paste.js") as file:
             code = file.read()
             pyperclip.copy(code)
         print("Code copied to your clipboard.")
