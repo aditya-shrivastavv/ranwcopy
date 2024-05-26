@@ -9,9 +9,9 @@ from argparse import ArgumentParser
 
 def init():
     parser = ArgumentParser(
-        prog="rwcopy",
+        prog="ranwcopy",
         description="Generates random words and sentences and copyies them to the clipboard.",
-        epilog="rwcopy - by Aditya Shrivastav",
+        epilog="ranwcopy - by Aditya Shrivastav",
     )
 
     parser.add_argument(
