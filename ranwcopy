@@ -7,71 +7,67 @@ import sys
 import winsound
 from argparse import ArgumentParser
 
-def init():
-    parser = ArgumentParser(
-        prog="ranwcopy",
-        description="Generates random words and sentences and copyies them to the clipboard.",
-        epilog="ranwcopy - by Aditya Shrivastav",
-    )
+parser = ArgumentParser(
+    prog="ranwcopy",
+    description="Generates random words and sentences and copyies them to the clipboard.",
+    epilog="ranwcopy - by Aditya Shrivastav",
+)
 
-    parser.add_argument(
-        "--gethelper", help="Copy Javascript console automation code", action="store_true", default=False
-    )
-    parser.add_argument(
-        "-i",
-        "--iterations",
-        default=10,
-        help="Number of words/sentences to generate (default = 10)",
-    )
-    parser.add_argument(
-        "-g",
-        "--timegap",
-        default=8,
-        help="Time gap (sec) between word consequent word generations (default = 8)",
-    )
-    raw_args = parser.parse_args()
+parser.add_argument(
+    "--gethelper", help="Copy Javascript console automation code", action="store_true", default=False
+)
+parser.add_argument(
+    "-i",
+    "--iterations",
+    default=10,
+    help="Number of words/sentences to generate (default = 10)",
+)
+parser.add_argument(
+    "-g",
+    "--timegap",
+    default=8,
+    help="Time gap (sec) between word consequent word generations (default = 8)",
+)
+raw_args = parser.parse_args()
 
-    if raw_args.gethelper == True:
-        with open(r"E:\MAIN\executables\python-word-gen-copy\paste.js") as file:
-            code = file.read()
-            pyperclip.copy(code)
-        print("Code copied to your clipboard.")
-        sys.exit(0)
+if raw_args.gethelper == True:
+    with open(r"E:\MAIN\executables\python-word-gen-copy\paste.js") as file:
+        code = file.read()
+        pyperclip.copy(code)
+    print("Code copied to your clipboard.")
+    sys.exit(0)
 
-    args = {}
-    try:
-        args = {"iterations": int(raw_args.iterations), "timegap": int(raw_args.timegap)}
-        print("- - -")
-        print("Total Iterations:", args["iterations"])
-        print("Time Gap:", args["timegap"], "seconds")
-        print("- - -")
-    except ValueError:
-        raise Exception("Both `iterations` and `timegap must be integer values.")
+args = {}
+try:
+    args = {"iterations": int(raw_args.iterations), "timegap": int(raw_args.timegap)}
+    print("- - -")
+    print("Total Iterations:", args["iterations"])
+    print("Time Gap:", args["timegap"], "seconds")
+    print("- - -")
+except ValueError:
+    raise Exception("Both `iterations` and `timegap must be integer values.")
 
-    rw = RandomWord()
-    rs = RandomSentence()
+rw = RandomWord()
+rs = RandomSentence()
 
-    for i in range(args["iterations"]):
-        winsound.Beep(2500, 400)
-        balancer = round(random.random())
+for i in range(args["iterations"]):
+    winsound.Beep(2500, 400)
+    balancer = round(random.random())
 
-        if balancer:
-            word = rw.word()
-            pyperclip.copy(word)
-        else:
-            sentence = rs.simple_sentence()
-            pyperclip.copy(sentence)
+    if balancer:
+        word = rw.word()
+        pyperclip.copy(word)
+    else:
+        sentence = rs.simple_sentence()
+        pyperclip.copy(sentence)
 
-        for remaining in range(args["timegap"], 0, -1):
-            sys.stdout.write("\r")
-            sys.stdout.write(f"{remaining:2} seconds remaining")
-            sys.stdout.flush()
-            time.sleep(1)
+    for remaining in range(args["timegap"], 0, -1):
+        sys.stdout.write("\r")
+        sys.stdout.write(f"{remaining:2} seconds remaining")
+        sys.stdout.flush()
+        time.sleep(1)
 
-        sys.stdout.write("\rPaste!!!                  \n")
-        print("Iterations remaining: ", args["iterations"] - i - 1, "\n")
+    sys.stdout.write("\rPaste!!!                  \n")
+    print("Iterations remaining: ", args["iterations"] - i - 1, "\n")
 
-    winsound.Beep(1800, 900)
-
-if __name__ == "__main__":
-    init()
+winsound.Beep(1800, 900)
