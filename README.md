@@ -55,7 +55,7 @@ Python program which generates random words and sentences and copy them to clipb
 Help menu
 
 ```bash copy
-rancopy -h
+ranwcopy -h
 #OR
 ranwcopy --help
 ```
